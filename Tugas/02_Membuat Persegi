@@ -1,0 +1,41 @@
+import pygame
+from pygame.locals import *
+from OpenGL.GL import *
+from OpenGL.GLUT import *
+from OpenGL.GLU import *
+
+def draw_square():
+    glBegin(GL_QUADS)
+    glColor3f(1.0, 0.0, 0.0)  # Warna merah
+    glVertex2f(100, 100)
+    glVertex2f(100, 200)
+    glVertex2f(200, 200)
+    glVertex2f(200, 100)
+    glEnd()
+
+def main():
+    pygame.init()
+    display = (400, 300)
+    pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
+
+    gluOrtho2D(0, display[0], display[1], 0)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        
+        pygame.display.set_caption('arnyanti')
+        
+        # Set latar belakang menjadi putih
+        glClearColor(1.0, 1.0, 1.0, 1.0)
+        
+        draw_square()
+        pygame.display.flip()
+        pygame.time.wait(10)
+
+if __name__ == "__main__":
+    main()
